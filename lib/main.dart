@@ -43,86 +43,88 @@ class _UserFormState extends State<UserForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Form'),
+        title: Center(child: Text('User Form')),
       ),
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Enter your name',
-                  labelText: 'Name',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _name = value!;
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Enter your email',
-                  labelText: 'Email',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _email = value!;
-                },
-              ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Source',
-                ),
-                value: _source,
-                onChanged: (newValue) {
-                  setState(() {
-                    _source = newValue!;
-                  });
-                },
-                items: <String>[
-                  'Facebook',
-                  'Instagram',
-                  'Organic',
-                  'Friend',
-                  'Google'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      addUser(
-                          User(name: _name, email: _email, source: _source));
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UserList()),
-                      );
+          padding: EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter your name',
+                    labelText: 'Name',
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your name';
                     }
+                    return null;
                   },
-                  child: Text('Submit'),
+                  onSaved: (value) {
+                    _name = value!;
+                  },
                 ),
-              ),
-            ],
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter your email',
+                    labelText: 'Email',
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _email = value!;
+                  },
+                ),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    labelText: 'Source',
+                  ),
+                  value: _source,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _source = newValue!;
+                    });
+                  },
+                  items: <String>[
+                    'Facebook',
+                    'Instagram',
+                    'Organic',
+                    'Friend',
+                    'Google'
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        addUser(
+                            User(name: _name, email: _email, source: _source));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserList()),
+                        );
+                      }
+                    },
+                    child: Text('Submit'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
